@@ -1,7 +1,8 @@
 # org-eval
 
-This package allows you to automatically execute code-blocks when you load
-or save `org-mode` files.
+`org-eval` is a utility package which makes it possible to automatically execute the contents of named blocks when `org-mode` files are loaded, or saved.
+
+It can be used to automatically update all tables in a document, via the use of `(org-table-iterate-buffer-tables)` for example.
 
 
 
@@ -35,8 +36,8 @@ If you prefer `use-package` then this works:
   :config
     (setq org-eval-prefix-list    (list (expand-file-name "~/Private/"))
           org-eval-loadblock-name "my-startblock"
-          org-eval-saveblock-name "my-saveblock"))
-    (org-eval-global-mode 1)
+          org-eval-saveblock-name "my-saveblock")
+    (org-eval-global-mode 1))
 ```
 
 If you **don't** enable `org-eval-global-mode` you can instead add a hook on certain files.
