@@ -116,7 +116,7 @@ NAME is the name of the block which will be evaluated."
   (save-excursion
     (org-save-outline-visibility t
       (if (member name (org-babel-src-block-names))
-          (if (org-eval-test-safe-file (buffer-file-name))
+          (if (org-eval-safe-file-p (buffer-file-name))
               (let ((org-confirm-babel-evaluate nil))
                 (org-babel-goto-named-src-block name)
                 (org-babel-execute-src-block))
@@ -135,10 +135,10 @@ NAME is the name of the block which will be evaluated."
   (if org-eval-saveblock-name
       (org-eval-execute-named-block org-eval-saveblock-name)))
 
-(defun org-eval-test-safe-file (path)
-  "Return non-nil if PATH is in one of `org-eval-allowed-dirs`."
-  (when (and path org-eval-prefix-list)
-    (let ((truename (file-truename path)))
+(defun org-eval-safe-file-p (file)
+  "Return non-nil if FILE is in one of `org-eval-allowed-dirs`."
+  (when (and file org-eval-prefix-list)
+    (let ((truename (file-truename file)))
       (seq-some (lambda (dir)
                   (string-prefix-p (file-name-as-directory (file-truename dir))
                                    truename))
@@ -202,7 +202,7 @@ the `org-eval-prefix-list'."
 (define-globalized-minor-mode org-eval-global-mode
   org-eval-mode
   org-eval-mode--enable
-  :group 'org-eval)
+)
 
 
 (provide 'org-eval)

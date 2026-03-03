@@ -16,21 +16,21 @@
 (ert-deftest org-eval-test-safe-file-nil-prefix-list ()
   "org-eval-test-safe-file should return nil if prefix list is nil."
   (let ((org-eval-prefix-list nil))
-    (should-not (org-eval-test-safe-file "/some/path/file.org"))))
+    (should-not (org-eval-safe-file-p "/some/path/file.org"))))
 
 
 (ert-deftest org-eval-test-safe-file-single-match ()
   "Should return t when PATH is inside the single allowed directory."
   (let ((org-eval-prefix-list (list temporary-file-directory))
         (file (org-eval-test--make-temp-file-in-dir temporary-file-directory "test.org")))
-    (should (org-eval-test-safe-file file))))
+    (should (org-eval-safe-file-p file))))
 
 
 (ert-deftest org-eval-test-safe-file-single-no-match ()
   "Should return nil when PATH is outside the allowed directory."
   (let ((org-eval-prefix-list (list "/nonexistent/dir"))
         (file (org-eval-test--make-temp-file-in-dir temporary-file-directory "test.org")))
-    (should-not (org-eval-test-safe-file file))))
+    (should-not (org-eval-safe-file-p file))))
 
 
 (ert-deftest org-eval-test-safe-file-multiple-prefixes ()
@@ -41,9 +41,9 @@
          (file1 (org-eval-test--make-temp-file-in-dir dir1 "a.org"))
          (file2 (org-eval-test--make-temp-file-in-dir dir2 "b.org"))
          (file3 (org-eval-test--make-temp-file-in-dir temporary-file-directory "c.org")))
-    (should (org-eval-test-safe-file file1))
-    (should (org-eval-test-safe-file file2))
-    (should-not (org-eval-test-safe-file file3))))
+    (should (org-eval-safe-file-p file1))
+    (should (org-eval-safe-file-p file2))
+    (should-not (org-eval-safe-file-p file3))))
 
 
 (ert-deftest org-eval-test-safe-file-truename-symlink ()
@@ -55,7 +55,7 @@
     (delete-directory link-dir)
     (make-symbolic-link real-dir link-dir t)
     (let ((org-eval-prefix-list (list link-dir)))
-      (should (org-eval-test-safe-file file)))))
+      (should (org-eval-safe-file-p file)))))
 
 
 (ert-deftest org-eval-test-safe-file-relative-paths ()
@@ -64,13 +64,13 @@
          (file (org-eval-test--make-temp-file-in-dir dir "file.org"))
          (rel-file (file-relative-name file default-directory))
          (org-eval-prefix-list (list dir)))
-    (should (org-eval-test-safe-file rel-file))))
+    (should (org-eval-safe-file-p rel-file))))
 
 
 (ert-deftest org-eval-test-safe-file-nil-path ()
   "Should return nil if PATH is nil."
   (let ((org-eval-prefix-list (list temporary-file-directory)))
-    (should-not (org-eval-test-safe-file nil))))
+    (should-not (org-eval-safe-file-p nil))))
 
 ;;;
 ;; Run the test cases
