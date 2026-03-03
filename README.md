@@ -39,6 +39,8 @@ If you prefer `use-package` then this works:
     (org-eval-global-mode 1)
 ```
 
+If you **don't** enable `org-eval-global-mode` you can instead add a hook on certain files.
+
 
 
 ## Safety
