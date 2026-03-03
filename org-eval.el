@@ -121,7 +121,7 @@ NAME is the name of the block which will be evaluated."
                 (org-babel-goto-named-src-block name)
                 (org-babel-execute-src-block))
             (message
-             "%s did not in org-eval-prefix-list, refusing evaluation of %s"
+             "%s not included in org-eval-prefix-list, refusing evaluation of %s"
              (buffer-file-name)
              name))))))
 
