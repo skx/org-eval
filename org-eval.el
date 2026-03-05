@@ -201,8 +201,7 @@ the `org-eval-prefix-list'."
 ;;;###autoload
 (define-globalized-minor-mode org-eval-global-mode
   org-eval-mode
-  org-eval-mode--enable
-)
+  org-eval-mode--enable)
 
 
 (provide 'org-eval)
