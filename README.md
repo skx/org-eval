@@ -21,7 +21,7 @@ Suggested usage if you're using the traditional approach:
 (setq org-eval-prefix-list (list (expand-file-name "~/Private/")))
 
 ;; Set the names of the blocks we should execute on load/save.
-(setq org-eval-loadblock-name "my-startblock"
+(setq org-eval-loadblock-name "my-loadblock"
       org-eval-saveblock-name "my-saveblock")
 
 ;; Enable for all org-mode files.
@@ -35,7 +35,7 @@ If you prefer `use-package` then this works:
   :after org
   :config
     (setq org-eval-prefix-list    (list (expand-file-name "~/Private/"))
-          org-eval-loadblock-name "my-startblock"
+          org-eval-loadblock-name "my-loadblock"
           org-eval-saveblock-name "my-saveblock")
     (org-eval-global-mode 1))
 ```
@@ -61,7 +61,7 @@ Consider the following `org-mode` file, assuming it is located within a director
 * Lisp Stuff
   Here we have a block of code which is automatically evaluated when this file is loaded:
 
-  #+NAME: skx-startblock
+  #+NAME: my-loadblock
   #+BEGIN_SRC emacs-lisp :results output silent
     (message "I am alive!")
   #+END_SRC
