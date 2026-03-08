@@ -2,9 +2,9 @@
 
 ;; Copyright (C) 2026  Steve Kemp
 
-;; Author: Steve Kemp
-;; Maintainer: Steve Kemp
-;; Version: 0.2
+;; Author: Steve Kemp <steve@steve.fi>
+;; Maintainer: Steve Kemp <steve@steve.fi>
+;; Version: 0.3
 ;; Package-Requires: ((emacs "29.1") (org "9.0"))
 ;; Keywords: org, outlines
 ;; URL: https://github.com/skx/org-eval
@@ -49,8 +49,8 @@
 ;; whitelisting particular prefix-directories, which means there is
 ;; no need to answer `y` to the prompt.
 ;;
-;; It is possible to change the names of the blocks to execute,
-;; for example I use the following configuration:
+;; So as a second line of defense we require you to explicitly
+;; name the blocks that you trust in your configuration, like so:
 ;;
 ;;   (use-package org-eval
 ;;     :after org
@@ -61,8 +61,14 @@
 ;;      (org-eval-global-mode 1))
 ;;
 ;; This means blocks named `skx-loadblock' will be executed when files
-;; are loaded from beneath ~/Private, and on-save the block named skx-saveblock
+;; are loaded from beneath `~/Private', and on-save the block named skx-saveblock
 ;; will be executed.
+;;
+;; I hope that this means there is no realistic way for malicious files
+;; to execute arbitrary code upon your system;  The files would have to
+;; have the correct named blocks, and be saved within a trusted directory
+;; before any possible malicious code could be executed.
+;;
 ;;
 
 (require 'org)
@@ -87,7 +93,7 @@
   :group 'org-eval)
 
 (defcustom org-eval-loadblock-name
-  "org-eval-load"
+  nil
   "Name of the source block executed when an Org file is visited.
 
 If nil, no block is executed on load."
@@ -96,7 +102,7 @@ If nil, no block is executed on load."
   :group 'org-eval)
 
 (defcustom org-eval-saveblock-name
-  "org-eval-save"
+  nil
   "Name of the source block executed before an Org file is saved.
 
 If nil, no block is executed on save."

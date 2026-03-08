@@ -46,7 +46,11 @@ If you **don't** enable `org-eval-global-mode` you can instead add a hook on cer
 
 ## Safety
 
-Because evaluating arbitrary lisp-code can have serious side-effects, and compromise security, the package will only execute code from files located within directories contained upon the list `org-eval-prefix-list`.
+Because evaluating arbitrary lisp-code can have serious side-effects, and compromise security, the package will only execute code from files located within directories contained upon the list `org-eval-prefix-list`, and it forces you to choose the names of the blocks to execute.
+
+I would suggest that your block names are something like "$HOST-$ME-load-block", where $ME is your username, and $HOST is your hostname, or similar.  Something that couldn't be predicted by anyone else.
+
+i.e. For a malicious document to do bad things it would have to have been saved within a trusted directory, and the name of the block to execute must match that you've specified.  That's two layers of security.
 
 
 
