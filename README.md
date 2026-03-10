@@ -10,8 +10,6 @@ It can be used to automatically update all tables in a document, via the use of 
 
 The legacy way to install would be to clone this repository and ensure the directory is available upon your load-path, or copy your local lisp tree.
 
-The package should be available upon MELPA soon.
-
 Suggested usage if you're using the traditional approach:
 
 ```
@@ -28,7 +26,7 @@ Suggested usage if you're using the traditional approach:
 (org-eval-global-mode 1)
 ```
 
-If you prefer `use-package` then this works:
+The package is now available upon MELPA, so you could install via `use-package` like so, with `straight`:
 
 ```
 (use-package org-eval
@@ -73,6 +71,16 @@ Consider the following `org-mode` file, assuming it is located within a director
   You could define a second block, with the name =my-saveblock= which would be executed
   when your file is saved too - which you might use to update all tables, or perform
   similar automation.
+```
+
+A more realistic and useful example would be to recalculate all tables upon document save, which is the use-case I originally wrote the package for:
+
+```
+    #+NAME: magical-saveblock
+    #+BEGIN_SRC emacs-lisp :results output silent
+    (org-table-iterate-buffer-tables)
+    (message "Updated all tables!")
+    #+END_SRC
 ```
 
 
