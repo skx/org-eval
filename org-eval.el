@@ -4,7 +4,7 @@
 
 ;; Author: Steve Kemp <steve@steve.fi>
 ;; Maintainer: Steve Kemp <steve@steve.fi>
-;; Version: v0.3.4
+;; Version: 0.3.5
 ;; Package-Requires: ((emacs "29.1") (org "9.0"))
 ;; Keywords: org, outlines
 ;; URL: https://github.com/skx/org-eval
